@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Harsha Bhogle in You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root{
+    --pitch:#0F3D2E;
+    --pitch-deep:#0A2A1F;
+    --ball:#C8372A;
+    --cream:#F3EEE0;
+    --ink:#101410;
+    --willow:#C9A66B;
+    --line: rgba(243,238,224,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Anton', sans-serif; letter-spacing:0.5px; text-transform:uppercase;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5vw;
+    background:rgba(243,238,224,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(16,20,16,0.08);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--ball);}
+  .brand-text{font-family:'Anton';font-size:18px;letter-spacing:1px;}
+  nav .links{display:flex;gap:28px;font-size:14px;font-weight:500;}
+  nav .links a{opacity:0.75;transition:opacity .2s;}
+  nav .links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--pitch); color:var(--cream); padding:9px 18px;
+    border-radius:3px; font-size:13px; font-weight:600;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 70% 0%, rgba(201,166,107,0.15), transparent 55%),
+      linear-gradient(180deg, var(--pitch) 0%, var(--pitch-deep) 100%);
+    color:var(--cream);
+    position:relative;
+    padding:140px 5vw 100px;
+    display:flex; flex-direction:column; justify-content:center;
+    overflow:hidden;
+  }
+  .pitch-lines{
+    position:absolute; inset:0; opacity:0.08;
+    background-image: repeating-linear-gradient(90deg, var(--cream) 0 1px, transparent 1px 80px);
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono'; font-size:12.5px; letter-spacing:2px;
+    color:var(--willow); margin-bottom:24px; text-transform:uppercase;
+  }
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--willow);}
+  .hero h1{
+    font-size:clamp(48px, 9vw, 118px);
+    line-height:0.92;
+    max-width:1100px;
+  }
+  .hero h1 .accent{color:var(--ball);}
+  .hero-sub{
+    margin-top:28px; max-width:560px; font-size:18px; line-height:1.6;
+    color:rgba(243,238,224,0.78);
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:42px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--ball); color:var(--cream); padding:16px 30px;
+    border-radius:3px; font-weight:600; font-size:15px;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:transform .2s; border:none; cursor:pointer;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid var(--line); color:var(--cream); padding:16px 28px;
+    border-radius:3px; font-size:15px; font-weight:500;
+  }
+  .scorecard{
+    position:absolute; right:5vw; bottom:60px; width:300px;
+    border:1px solid var(--line); background:rgba(243,238,224,0.04);
+    padding:18px; font-family:'JetBrains Mono'; font-size:12px;
+    color:rgba(243,238,224,0.7);
+    display:none;
+  }
+  @media(min-width:900px){ .scorecard{display:block;} }
+  .scorecard .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(243,238,224,0.12);}
+  .scorecard .row:last-child{border:none;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--ball);display:inline-block;margin-right:6px;animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+  /* SECTION BASE */
+  section{padding:120px 5vw;}
+  .eyebrow-dark{
+    font-family:'JetBrains Mono'; font-size:12.5px; letter-spacing:2px;
+    color:var(--ball); text-transform:uppercase; margin-bottom:16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow-dark::before{content:'';width:24px;height:1px;background:var(--ball);}
+  .sec-title{font-size:clamp(32px,5vw,56px); max-width:760px; line-height:1.05; margin-bottom:20px;}
+  .sec-body{max-width:620px; font-size:17px; line-height:1.7; opacity:0.75;}
+
+  /* MOMENTS */
+  .moments-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:1px; background:rgba(16,20,16,0.1); margin-top:56px;
+    border:1px solid rgba(16,20,16,0.1);
+  }
+  .moment{
+    background:var(--cream); padding:36px 28px; transition:background .25s;
+    position:relative;
+  }
+  .moment:hover{background:#EDE6D2;}
+  .moment .num{font-family:'JetBrains Mono'; font-size:12px; color:var(--ball); margin-bottom:18px; display:block;}
+  .moment h3{font-family:'Anton'; font-size:22px; text-transform:uppercase; margin-bottom:10px; line-height:1.2;}
+  .moment p{font-size:14.5px; opacity:0.65; line-height:1.6;}
+
+  /* HOW IT WORKS */
+  .how{background:var(--ink); color:var(--cream);}
+  .how .eyebrow-dark{color:var(--willow);}
+  .how .eyebrow-dark::before{background:var(--willow);}
+  .steps{margin-top:56px; display:flex; flex-direction:column;}
+  .step{
+    display:grid; grid-template-columns:90px 1fr; gap:24px;
+    padding:32px 0; border-top:1px solid rgba(243,238,224,0.12);
+  }
+  .step:last-child{border-bottom:1px solid rgba(243,238,224,0.12);}
+  .step .step-num{font-family:'Anton'; font-size:40px; color:rgba(243,238,224,0.18);}
+  .step h4{font-size:20px; margin-bottom:8px; font-weight:600;}
+  .step p{font-size:15px; opacity:0.65; max-width:560px; line-height:1.6;}
+
+  /* JUDGE */
+  .judge{
+    background:linear-gradient(180deg, var(--pitch-deep), var(--pitch));
+    color:var(--cream);
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  @media(max-width:860px){.judge{grid-template-columns:1fr;}}
+  .judge-card{
+    border:1px solid var(--line); padding:40px;
+    background:rgba(243,238,224,0.03);
+  }
+  .judge-card .quote-mark{font-family:'Anton'; font-size:60px; color:var(--ball); line-height:1; margin-bottom:10px;}
+  .judge-card p{font-size:19px; line-height:1.6; font-style:italic; opacity:0.9;}
+  .judge-card .who{margin-top:24px; font-family:'JetBrains Mono'; font-size:13px; color:var(--willow);}
+
+  /* SPEAK BOX */
+  .speak-section{background:var(--cream);}
+  .speak-box{
+    max-width:680px; margin:56px auto 0; border:1px solid rgba(16,20,16,0.15);
+    background:#fff; padding:0; overflow:hidden;
+  }
+  .speak-header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px; border-bottom:1px solid rgba(16,20,16,0.1);
+    background:var(--pitch); color:var(--cream);
+  }
+  .speak-header .label{font-family:'JetBrains Mono'; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;}
+  .mic-btn{
+    display:flex; align-items:center; gap:8px;
+    background:var(--ball); color:var(--cream); border:none;
+    padding:10px 18px; border-radius:30px; font-weight:600; font-size:13.5px;
+    cursor:pointer; transition:transform .15s, opacity .15s;
+  }
+  .mic-btn:hover{transform:translateY(-1px);}
+  .mic-btn.listening{background:#8d1f16;}
+  .mic-btn .mic-dot{width:8px;height:8px;border-radius:50%;background:var(--cream);}
+  .mic-btn.listening .mic-dot{animation:pulse 1s infinite;}
+  #speakArea{
+    width:100%; min-height:160px; border:none; resize:vertical;
+    padding:24px; font-family:'Space Grotesk'; font-size:16px; line-height:1.6;
+    background:#fff; color:var(--ink);
+  }
+  #speakArea:focus{outline:none;}
+  #speakArea::placeholder{color:rgba(16,20,16,0.35);}
+  .speak-footer{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 24px; border-top:1px solid rgba(16,20,16,0.1);
+    font-family:'JetBrains Mono'; font-size:11.5px; opacity:0.55;
+  }
+  .speak-note{max-width:680px; margin:18px auto 0; font-size:13.5px; opacity:0.6; text-align:center;}
+
+  /* ENTER / CTA */
+  .enter{background:var(--cream); text-align:center;}
+  .enter .sec-title{margin:0 auto 20px; }
+  .enter .sec-body{margin:0 auto 40px;}
+  .form-box{
+    max-width:480px; margin:0 auto; border:1px solid rgba(16,20,16,0.15);
+    padding:36px; text-align:left; background:#fff;
+  }
+  .form-box label{font-family:'JetBrains Mono'; font-size:11.5px; letter-spacing:1px; text-transform:uppercase; opacity:0.6; display:block; margin-bottom:6px;}
+  .form-box input, .form-box select{
+    width:100%; padding:12px 14px; margin-bottom:18px; border:1px solid rgba(16,20,16,0.15);
+    font-family:'Space Grotesk'; font-size:14px; background:var(--cream);
+  }
+  .form-box button{width:100%;}
+
+  footer{
+    background:var(--ink); color:rgba(243,238,224,0.5);
+    padding:40px 5vw; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:13px; font-family:'JetBrains Mono';
+  }
+
+  ::selection{background:var(--ball); color:var(--cream);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="dot"></span><span class="brand-text">THE HARSHA BHOGLE IN YOU</span></div>
+  <div class="links" id="navlinks">
+    <a href="#moments">Examples</a>
+    <a href="#how">How it works</a>
+    <a href="#judge">Judging</a>
+    <a href="#speak">Speak</a>
+  </div>
+  <a href="#enter" class="nav-cta">Enter Now</a>
+</nav>
+
+<section class="hero">
+  <div class="pitch-lines"></div>
+  <span class="eyebrow">Find the commentator in you</span>
+  <h1 class="display">The Harsha<br>Bhogle <span class="accent">in</span><br>You.</h1>
+  <p class="hero-sub">Pick any moment from cricket history. Recreate it, with your voice and your emotion, in one minute. Harsha Bhogle decides who got it right.</p>
+  <div class="hero-actions">
+    <a href="#speak" class="btn-primary">Take the mic →</a>
+    <a href="#how" class="btn-ghost">How it works</a>
+  </div>
+  <div class="scorecard">
+    <div class="row"><span><span class="live-dot"></span>STATUS</span><span>RECORDING</span></div>
+    <div class="row"><span>MOMENT</span><span>YOUR CHOICE</span></div>
+    <div class="row"><span>TOOL</span><span>WISPR FLOW</span></div>
+    <div class="row"><span>JUDGE</span><span>H. BHOGLE</span></div>
+    <div class="row"><span>TIME LEFT</span><span>00:47</span></div>
+  </div>
+</section>
+
+<section id="moments">
+  <span class="eyebrow-dark">These are just examples</span>
+  <h2 class="sec-title">The scene is entirely up to you.</h2>
+  <p class="sec-body">What you see below are starting points, not a checklist. Any moment from cricket history is fair game, as long as it's one that means something when you call it. Pick the scene that lives in your memory, and recreate it the way you remember feeling it.</p>
+  <div class="moments-grid">
+    <div class="moment"><span class="num">EXAMPLE</span><h3>Sachin's 100th</h3><p>The century of centuries, against Bangladesh, March 2012. Recreate the build-up and the release.</p></div>
+    <div class="moment"><span class="num">EXAMPLE</span><h3>2011 World Cup</h3><p>Dhoni's six into the Mumbai night sky. The moment a billion people exhaled at once.</p></div>
+    <div class="moment"><span class="num">EXAMPLE</span><h3>1993 Triumph</h3><p>Where it all began. Call the win that gave Indian cricket its first taste of glory.</p></div>
+    <div class="moment"><span class="num">YOUR CHOICE</span><h3>Any Scene You Want</h3><p>A local match, a World Cup final, a moment nobody else would think to call. If it means something to you, it belongs here.</p></div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <span class="eyebrow-dark">How it works</span>
+  <h2 class="sec-title">From living room to commentary box.</h2>
+  <div class="steps">
+    <div class="step"><span class="step-num display">1</span><div><h4>Pick your scene</h4><p>Any moment from cricket history. The examples are just a starting point, the choice is entirely yours.</p></div></div>
+    <div class="step"><span class="step-num display">2</span><div><h4>Set up the mic</h4><p>Phone camera rolling, Wispr Flow open on your phone or laptop. Both run at once.</p></div></div>
+    <div class="step"><span class="step-num display">3</span><div><h4>Call it, with feeling</h4><p>One minute, one take. Dictate the moment as commentary, and let the emotion show on camera, exactly as you'd call it from the box.</p></div></div>
+    <div class="step"><span class="step-num display">4</span><div><h4>Submit both</h4><p>Your video and your Wispr Flow transcript are submitted together through this site.</p></div></div>
+    <div class="step"><span class="step-num display">5</span><div><h4>Bhogle decides</h4><p>Entries go to the Wispr Flow team, and the final call on every winner is Harsha Bhogle's.</p></div></div>
+  </div>
+</section>
+
+<section class="judge" id="judge">
+  <div>
+    <span class="eyebrow-dark" style="color:var(--willow)">Judging</span>
+    <h2 class="sec-title" style="margin-bottom:0;">Harsha Bhogle is the complete decider.</h2>
+    <p class="sec-body" style="color:rgba(243,238,224,0.7); margin-top:20px;">Every entry is reviewed in full, the video and the Wispr Flow transcript together. Marks are built across three things, and the final word on every score is his.</p>
+  </div>
+  <div class="judge-card" style="padding:32px;">
+    <div class="row" style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px dashed rgba(243,238,224,0.18);">
+      <span style="font-weight:600;">Emotion</span><span class="mono" style="opacity:0.6;font-size:13px;">how it felt to watch you</span>
+    </div>
+    <div class="row" style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px dashed rgba(243,238,224,0.18);">
+      <span style="font-weight:600;">Delivery</span><span class="mono" style="opacity:0.6;font-size:13px;">pace, tone, presence on camera</span>
+    </div>
+    <div class="row" style="display:flex;justify-content:space-between;padding:14px 0;">
+      <span style="font-weight:600;">Wispr Flow record</span><span class="mono" style="opacity:0.6;font-size:13px;">what got captured, word for word</span>
+    </div>
+    <p style="margin-top:24px;font-size:14px;opacity:0.7;font-style:italic;">All three count. Harsha Bhogle's decision on every entry is final.</p>
+  </div>
+</section>
+
+<section class="speak-section" id="speak">
+  <span class="eyebrow-dark">This is where they will speak</span>
+  <h2 class="sec-title">Say it. Watch it appear.</h2>
+  <p class="sec-body">Hit the mic and call your moment out loud. Your words will be transcribed live into the box below, just like Wispr Flow does it. You can also type or edit directly.</p>
+  <div class="speak-box">
+    <div class="speak-header">
+      <span class="label">Live commentary transcript</span>
+      <button class="mic-btn" id="micBtn" type="button">
+        <span class="mic-dot" id="micDot"></span>
+        <span id="micLabel">Start speaking</span>
+      </button>
+    </div>
+    <textarea id="speakArea" placeholder="Tap &quot;Start speaking&quot; and call your moment out loud — or just type it here..."></textarea>
+    <div class="speak-footer">
+      <span id="wordCount">0 words</span>
+      <span id="micStatus">Mic idle</span>
+    </div>
+  </div>
+  <p class="speak-note">Voice transcription uses your browser's built-in speech recognition (Chrome recommended). If it isn't supported, just type your commentary directly into the box.</p>
+</section>
+
+<section class="enter" id="enter">
+  <span class="eyebrow-dark" style="justify-content:center;">Take the mic</span>
+  <h2 class="sec-title">Your scene, your voice, your minute.</h2>
+  <p class="sec-body">Sign up, choose any moment from cricket, and get ready to deliver it like you mean it.</p>
+  <div class="form-box">
+    <label for="name">Full name</label>
+    <input id="name" type="text" placeholder="Your name">
+    <label for="college">College / City</label>
+    <input id="college" type="text" placeholder="Where you're calling from">
+    <label for="moment">The scene you'll recreate</label>
+    <input id="moment" type="text" placeholder="e.g. Sachin's 100th, or a moment of your own">
+    <button class="btn-primary" type="button" onclick="alert('Thanks! This is a concept site — entries open closer to launch.')">Reserve my spot →</button>
+  </div>
+</section>
+
+<footer>
+  <span>THE HARSHA BHOGLE IN YOU</span>
+  <span>A WISPR FLOW × HARSHA BHOGLE COLLABORATION</span>
+</footer>
+
+<script>
+(function(){
+  const micBtn = document.getElementById('micBtn');
+  const micDot = document.getElementById('micDot');
+  const micLabel = document.getElementById('micLabel');
+  const micStatus = document.getElementById('micStatus');
+  const speakArea = document.getElementById('speakArea');
+  const wordCount = document.getElementById('wordCount');
+
+  function updateWordCount(){
+    const text = speakArea.value.trim();
+    const count = text.length ? text.split(/\s+/).length : 0;
+    wordCount.textContent = count + ' word' + (count === 1 ? '' : 's');
+  }
+  speakArea.addEventListener('input', updateWordCount);
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition = null;
+  let listening = false;
+  let baseText = '';
+
+  if(SpeechRecognition){
+    recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-IN';
+
+    recognition.onresult = function(event){
+      let finalText = '';
+      let interimText = '';
+      for(let i = event.resultIndex; i < event.results.length; i++){
+        const transcript = event.results[i][0].transcript;
+        if(event.results[i].isFinal){
+          finalText += transcript + ' ';
+        } else {
+          interimText += transcript;
+        }
+      }
+      if(finalText){
+        baseText = (baseText + ' ' + finalText).trim();
+      }
+      speakArea.value = (baseText + ' ' + interimText).trim();
+      updateWordCount();
+    };
+
+    recognition.onerror = function(){
+      micStatus.textContent = 'Mic error — try again';
+    };
+
+    recognition.onend = function(){
+      if(listening){
+        recognition.start();
+      } else {
+        micStatus.textContent = 'Mic idle';
+      }
+    };
+  } else {
+    micBtn.disabled = true;
+    micBtn.style.opacity = '0.5';
+    micLabel.textContent = 'Mic not supported';
+    micStatus.textContent = 'Type your commentary instead';
+  }
+
+  micBtn.addEventListener('click', function(){
+    if(!recognition) return;
+    if(!listening){
+      baseText = speakArea.value;
+      listening = true;
+      micBtn.classList.add('listening');
+      micLabel.textContent = 'Stop speaking';
+      micStatus.textContent = 'Listening…';
+      recognition.start();
+    } else {
+      listening = false;
+      micBtn.classList.remove('listening');
+      micLabel.textContent = 'Start speaking';
+      micStatus.textContent = 'Mic idle';
+      recognition.stop();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
